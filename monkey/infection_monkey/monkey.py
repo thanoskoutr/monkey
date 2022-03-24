@@ -332,8 +332,9 @@ class InfectionMonkey:
                     from subprocess import CREATE_NEW_CONSOLE, STARTF_USESHOWWINDOW, SW_HIDE
 
                     startupinfo = subprocess.STARTUPINFO()
-                    startupinfo.dwFlags = CREATE_NEW_CONSOLE | STARTF_USESHOWWINDOW
-                    startupinfo.wShowWindow = SW_HIDE
+                    # startupinfo.dwFlags = CREATE_NEW_CONSOLE | STARTF_USESHOWWINDOW
+                    # startupinfo.wShowWindow = SW_HIDE
+                    logger.debug("MONKEY IS TRYING TO DELETE ITSELF")
                     subprocess.Popen(
                         DELAY_DELETE_CMD % {"file_path": sys.executable},
                         stdin=None,
