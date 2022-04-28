@@ -79,6 +79,13 @@ install_monkey_island_python_dependencies() {
 
   log_message "Installing island python requirements"
   "$APPDIR"/AppRun -m pip install -r "${requirements_island}"  --ignore-installed || handle_error
+
+  log_message "Uninstalling pipenv"
+  "$APPDIR"/AppRun -m pip uninstall -y pipenv || handle_error
+
+  log_message "Uninstalling pip"
+  "$APPDIR"/AppRun -m pip uninstall -y pip setuptools || handle_error
+
 }
 
 generate_requirements_from_pipenv_lock () {
