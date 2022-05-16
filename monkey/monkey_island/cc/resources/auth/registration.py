@@ -13,12 +13,23 @@ logger = logging.getLogger(__name__)
 
 
 class Registration(MethodResource, flask_restful.Resource):
+    """
+    API for registration
+    """
+
     @doc(description="Monkey registration GET method.", tags=["registration"])
     def get(self):
+        """
+        GET Method. It uses AuthenticationService.needs_registration.
+
+        """
         return {"needs_registration": AuthenticationService.needs_registration()}
 
     @doc(description="Monkey registration POST method.", tags=["registration"])
     def post(self):
+        """
+        POST Method. It grab the username and password from the request
+        """
         username, password = get_username_password_from_request(request)
 
         try:
