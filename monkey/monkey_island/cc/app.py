@@ -4,7 +4,10 @@ from datetime import timedelta
 from typing import Type
 
 import flask_restful
+from apispec import APISpec
+from apispec.ext.marshmallow import MarshmallowPlugin
 from flask import Flask, Response, send_from_directory
+from flask_apispec.extension import FlaskApiSpec
 from werkzeug.exceptions import NotFound
 
 from common import DIContainer
@@ -90,6 +93,19 @@ def init_app_config(app, mongo_url):
     # By default, Flask sorts keys of JSON objects alphabetically.
     # See https://flask.palletsprojects.com/en/1.1.x/config/#JSON_SORT_KEYS.
     app.config["JSON_SORT_KEYS"] = False
+
+    app.config.update(
+        {
+            "APISPEC_SPEC": APISpec(
+                title="Infection Monkey API Docs",
+                version="v0.0.0",
+                plugins=[MarshmallowPlugin()],
+                openapi_version="2.0.0",
+            ),
+            "APISPEC_SWAGGER_URL": "/monkey-api/",  # URI to access API Doc JSON
+            "APISPEC_SWAGGER_UI_URL": "/api/docs",  # URI to access UI of API Doc
+        }
+    )
 
     app.url_map.strict_slashes = False
     app.json_encoder = CustomJSONEncoder
@@ -180,6 +196,50 @@ def init_api_resources(api: FlaskDIWrapper):
     api.add_resource(TelemetryBlackboxEndpoint, "/api/test/telemetry")
 
 
+def init_app_docs(docs: FlaskApiSpec):
+    docs.register(Root)
+    docs.register(Registration)
+    docs.register(Monkey)
+    docs.register(LocalRun)
+    docs.register(Telemetry)
+    docs.register(IslandMode)
+    docs.register(IslandConfiguration)
+    docs.register(ConfigurationExport)
+    docs.register(ConfigurationImport)
+    docs.register(MonkeyDownload)
+    docs.register(NetMap)
+    docs.register(Edge)
+    docs.register(Node)
+    docs.register(NodeStates)
+
+    docs.register(SecurityReport)
+    docs.register(ZeroTrustReport)
+    docs.register(AttackReport)
+    docs.register(RansomwareReport)
+    docs.register(ManualExploitation)
+    docs.register(MonkeyExploitation)
+
+    docs.register(ZeroTrustFindingEvent)
+    docs.register(TelemetryFeed)
+    docs.register(Log)
+    docs.register(IslandLog)
+
+    # docs.register(PBAFileDownload)
+    # docs.register(FileUpload)
+
+    docs.register(PropagationCredentials)
+    docs.register(RemoteRun)
+    docs.register(VersionUpdate)
+    docs.register(StopAgentCheck)
+    docs.register(StopAllAgents)
+
+    # Resources used by black box tests
+    docs.register(MonkeyBlackboxEndpoint)
+    docs.register(ClearCaches)
+    docs.register(LogBlackboxEndpoint)
+    docs.register(TelemetryBlackboxEndpoint)
+
+
 def init_app(mongo_url: str, container: DIContainer):
     app = Flask(__name__)
 
@@ -192,5 +252,9 @@ def init_app(mongo_url: str, container: DIContainer):
 
     flask_resource_manager = FlaskDIWrapper(api, container)
     init_api_resources(flask_resource_manager)
+
+    docs = FlaskApiSpec(app)
+
+    init_app_docs(docs)
 
     return app

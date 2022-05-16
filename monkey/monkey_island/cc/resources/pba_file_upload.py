@@ -3,6 +3,7 @@ from http import HTTPStatus
 
 import flask_restful
 from flask import Response, make_response, request, send_file
+from flask_apispec.views import MethodResource
 from werkzeug.utils import secure_filename as sanitize_filename
 
 from common.config_value_paths import PBA_LINUX_FILENAME_PATH, PBA_WINDOWS_FILENAME_PATH
@@ -18,7 +19,7 @@ LINUX_PBA_TYPE = "PBAlinux"
 WINDOWS_PBA_TYPE = "PBAwindows"
 
 
-class FileUpload(flask_restful.Resource):
+class FileUpload(MethodResource, flask_restful.Resource):
     """
     File upload endpoint used to send/receive Custom PBA files
     """

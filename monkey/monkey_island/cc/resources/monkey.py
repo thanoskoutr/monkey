@@ -3,6 +3,7 @@ from datetime import datetime
 
 import flask_restful
 from flask import request
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.database import mongo
 from monkey_island.cc.models.monkey_ttl import create_monkey_ttl_document
@@ -16,10 +17,19 @@ from monkey_island.cc.services.node import NodeService
 # TODO: separate logic from interface
 
 
-class Monkey(flask_restful.Resource):
+class Monkey(MethodResource, flask_restful.Resource):
 
     # Used by monkey. can't secure.
     def get(self, guid=None, config_format=None, **kw):
+        """Gist view
+        ---
+        description: Get a gist
+        responses:
+          200:
+            content:
+              application/json:
+                schema: GistSchema
+        """
         if not guid:
             guid = request.args.get("guid")
 

@@ -2,6 +2,7 @@ import http.client
 
 import flask_restful
 from flask import jsonify
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.resources.auth.auth import jwt_required
 from monkey_island.cc.services.zero_trust.zero_trust_report.finding_service import FindingService
@@ -15,7 +16,7 @@ REPORT_DATA_FINDINGS = "findings"
 REPORT_DATA_PRINCIPLES_STATUS = "principles"
 
 
-class ZeroTrustReport(flask_restful.Resource):
+class ZeroTrustReport(MethodResource, flask_restful.Resource):
     @jwt_required
     def get(self, report_data=None):
         if report_data == REPORT_DATA_PILLARS:

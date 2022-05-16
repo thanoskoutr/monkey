@@ -1,6 +1,7 @@
 import logging
 
 import flask_restful
+from flask_apispec.views import MethodResource
 
 from common.version import get_version
 from monkey_island.cc.services.version_update import VersionUpdateService
@@ -8,7 +9,7 @@ from monkey_island.cc.services.version_update import VersionUpdateService
 logger = logging.getLogger(__name__)
 
 
-class VersionUpdate(flask_restful.Resource):
+class VersionUpdate(MethodResource, flask_restful.Resource):
     def __init__(self):
         super(VersionUpdate, self).__init__()
 

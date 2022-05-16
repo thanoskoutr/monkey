@@ -1,10 +1,11 @@
 import flask_restful
 from flask import request
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.services.edge.displayed_edge import DisplayedEdgeService
 
 
-class Edge(flask_restful.Resource):
+class Edge(MethodResource, flask_restful.Resource):
     def get(self):
         edge_id = request.args.get("id")
         displayed_edge = DisplayedEdgeService.get_displayed_edge_by_id(edge_id)

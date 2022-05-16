@@ -4,6 +4,7 @@ from functools import wraps
 import flask_jwt_extended
 import flask_restful
 from flask import make_response, request
+from flask_apispec.views import MethodResource
 from flask_jwt_extended.exceptions import JWTExtendedException
 from jwt import PyJWTError
 
@@ -21,7 +22,7 @@ def init_jwt(app):
     )
 
 
-class Authenticate(flask_restful.Resource):
+class Authenticate(MethodResource, flask_restful.Resource):
     """
     Resource for user authentication. The user provides the username and password and we
     give them a JWT.

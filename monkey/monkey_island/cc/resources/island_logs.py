@@ -1,6 +1,7 @@
 import logging
 
 import flask_restful
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.resources.auth.auth import jwt_required
 from monkey_island.cc.services.island_logs import IslandLogService
@@ -8,7 +9,7 @@ from monkey_island.cc.services.island_logs import IslandLogService
 logger = logging.getLogger(__name__)
 
 
-class IslandLog(flask_restful.Resource):
+class IslandLog(MethodResource, flask_restful.Resource):
     @jwt_required
     def get(self):
         try:

@@ -2,6 +2,7 @@ import logging
 
 import flask_restful
 from flask import jsonify, make_response, request
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.database import mongo
 from monkey_island.cc.resources.auth.auth import jwt_required
@@ -12,7 +13,7 @@ from monkey_island.cc.services.utils.network_utils import local_ip_addresses
 logger = logging.getLogger(__name__)
 
 
-class Root(flask_restful.Resource):
+class Root(MethodResource, flask_restful.Resource):
     def get(self, action=None):
         if not action:
             action = request.args.get("action")

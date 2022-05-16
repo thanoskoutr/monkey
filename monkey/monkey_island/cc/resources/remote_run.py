@@ -3,6 +3,8 @@ import json
 import flask_restful
 from botocore.exceptions import ClientError, NoCredentialsError
 from flask import jsonify, make_response, request
+from flask_apispec import doc
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.resources.auth.auth import jwt_required
 from monkey_island.cc.services import aws_service
@@ -18,12 +20,24 @@ NO_CREDS_ERROR_FORMAT = (
 )
 
 
-class RemoteRun(flask_restful.Resource):
+class RemoteRun(MethodResource, flask_restful.Resource):
     def run_aws_monkeys(self, request_body):
         instances = request_body.get("instances")
         island_ip = request_body.get("island_ip")
         return RemoteRunAwsService.run_aws_monkeys(instances, island_ip)
 
+    @doc(
+        description="Test token access",
+        params={
+            "Authorization": {
+                "description": "Authorization HTTP header with JWT access token,"
+                "like: Authorization: Bearer asdf.qwer.zxcv",
+                "in": "header",
+                "type": "string",
+                "required": True,
+            }
+        },
+    )
     @jwt_required
     def get(self):
         action = request.args.get("action")

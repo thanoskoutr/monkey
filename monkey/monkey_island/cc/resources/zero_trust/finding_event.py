@@ -1,6 +1,7 @@
 import json
 
 import flask_restful
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.resources.auth.auth import jwt_required
 from monkey_island.cc.services.zero_trust.monkey_findings.monkey_zt_finding_service import (
@@ -8,7 +9,7 @@ from monkey_island.cc.services.zero_trust.monkey_findings.monkey_zt_finding_serv
 )
 
 
-class ZeroTrustFindingEvent(flask_restful.Resource):
+class ZeroTrustFindingEvent(MethodResource, flask_restful.Resource):
     @jwt_required
     def get(self, finding_id: str):
         return {

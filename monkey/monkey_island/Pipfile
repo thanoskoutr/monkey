@@ -25,6 +25,10 @@ Werkzeug = ">=1.0.1"
 pyaescrypt = "*"
 python-dateutil = "*"
 cffi = "*"  # Without explicit install: ModuleNotFoundError: No module named '_cffi_backend'
+flask_apispec = "==0.11.0"
+marshmallow = "*"
+apispec = "*"
+apispec-webframeworks = "*"
 
 [dev-packages]
 virtualenv = ">=20.0.26"

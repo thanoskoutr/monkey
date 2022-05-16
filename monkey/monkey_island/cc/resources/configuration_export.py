@@ -2,13 +2,14 @@ import json
 
 import flask_restful
 from flask import request
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.resources.auth.auth import jwt_required
 from monkey_island.cc.server_utils.encryption import PasswordBasedStringEncryptor
 from monkey_island.cc.services.config import ConfigService
 
 
-class ConfigurationExport(flask_restful.Resource):
+class ConfigurationExport(MethodResource, flask_restful.Resource):
     @jwt_required
     def post(self):
         data = json.loads(request.data)

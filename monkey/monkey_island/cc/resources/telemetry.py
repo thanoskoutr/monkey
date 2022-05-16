@@ -5,6 +5,7 @@ from datetime import datetime
 import dateutil
 import flask_restful
 from flask import request
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.database import mongo
 from monkey_island.cc.models.monkey import Monkey
@@ -17,7 +18,7 @@ from monkey_island.cc.services.telemetry.processing.processing import process_te
 logger = logging.getLogger(__name__)
 
 
-class Telemetry(flask_restful.Resource):
+class Telemetry(MethodResource, flask_restful.Resource):
     @jwt_required
     def get(self, **kw):
         monkey_guid = request.args.get("monkey_guid")

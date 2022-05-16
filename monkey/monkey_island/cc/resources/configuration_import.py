@@ -5,6 +5,7 @@ from json.decoder import JSONDecodeError
 
 import flask_restful
 from flask import request
+from flask_apispec.views import MethodResource
 
 from common.utils.exceptions import InvalidConfigurationError
 from monkey_island.cc.resources.auth.auth import jwt_required
@@ -38,7 +39,7 @@ class ResponseContents:
         return self.__dict__
 
 
-class ConfigurationImport(flask_restful.Resource):
+class ConfigurationImport(MethodResource, flask_restful.Resource):
     SUCCESS = False
 
     @jwt_required

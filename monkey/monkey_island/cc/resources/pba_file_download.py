@@ -2,13 +2,14 @@ import logging
 
 import flask_restful
 from flask import make_response, send_file
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.services import FileRetrievalError, IFileStorageService
 
 logger = logging.getLogger(__file__)
 
 
-class PBAFileDownload(flask_restful.Resource):
+class PBAFileDownload(MethodResource, flask_restful.Resource):
     """
     File download endpoint used by monkey to download user's PBA file
     """

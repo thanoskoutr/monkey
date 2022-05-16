@@ -2,6 +2,7 @@ import json
 
 import flask_restful
 from flask import jsonify, make_response, request
+from flask_apispec.views import MethodResource
 
 from monkey_island.cc.models import Monkey
 from monkey_island.cc.resources.auth.auth import jwt_required
@@ -9,7 +10,7 @@ from monkey_island.cc.services.node import NodeService
 from monkey_island.cc.services.run_local_monkey import LocalMonkeyRunService
 
 
-class LocalRun(flask_restful.Resource):
+class LocalRun(MethodResource, flask_restful.Resource):
     @jwt_required
     def get(self):
         island_monkey = NodeService.get_monkey_island_monkey()
