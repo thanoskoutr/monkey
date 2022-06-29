@@ -18,6 +18,7 @@ import ConfigImportModal from '../configuration-components/ImportConfigModal';
 import applyUiSchemaManipulators from '../configuration-components/UISchemaManipulators.tsx';
 import HtmlFieldDescription from '../configuration-components/HtmlFieldDescription.js';
 import CONFIGURATION_TABS_PER_MODE from '../configuration-components/ConfigurationTabs.js';
+import {SCHEMA} from '../../services/configuration/config_schema.js';
 
 const CONFIG_URL = '/api/configuration/island';
 export const API_PBA_LINUX = '/api/file-upload/PBAlinux';
@@ -78,11 +79,12 @@ class ConfigurePageComponent extends AuthComponent {
         for (let sectionKey of this.getSectionsOrder()) {
           sections.push({
             key: sectionKey,
-            title: monkeyConfig.schema.properties[sectionKey].title
+            title: SCHEMA.properties[sectionKey].title
           });
         }
+
         this.setState({
-          schema: monkeyConfig.schema,
+          schema: SCHEMA,
           configuration: monkeyConfig.configuration,
           sections: sections,
           currentFormData: monkeyConfig.configuration[this.state.selectedSection]
@@ -391,7 +393,7 @@ class ConfigurePageComponent extends AuthComponent {
                  style={{'marginBottom': '2em'}}
                  className={'config-nav'}>
       {this.state.sections.map(section => {
-        let classProp = section.key.startsWith('basic') ? 'tab-primary' : '';
+        let classProp = section.key.startsWith('general') ? 'tab-primary' : '';
         return (
           <Nav.Item key={section.key}>
             <Nav.Link className={classProp} eventKey={section.key}>{section.title}</Nav.Link>
