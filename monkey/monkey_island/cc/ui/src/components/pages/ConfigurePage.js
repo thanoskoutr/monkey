@@ -19,8 +19,9 @@ import applyUiSchemaManipulators from '../configuration-components/UISchemaManip
 import HtmlFieldDescription from '../configuration-components/HtmlFieldDescription.js';
 import CONFIGURATION_TABS_PER_MODE from '../configuration-components/ConfigurationTabs.js';
 import {SCHEMA} from '../../services/configuration/config_schema.js';
+import {changeToUI} from '../../services/configuration/config_facade';
 
-const CONFIG_URL = '/api/configuration/island';
+const CONFIG_URL = '/api/agent-configuration';
 export const API_PBA_LINUX = '/api/file-upload/PBAlinux';
 export const API_PBA_WINDOWS = '/api/file-upload/PBAwindows';
 
@@ -65,7 +66,7 @@ class ConfigurePageComponent extends AuthComponent {
 
   setInitialConfig(config) {
     // Sets a reference to know if config was changed
-    this.initialConfig = JSON.parse(JSON.stringify(config));
+    this.initialConfig = config;
   }
 
   componentDidMount = () => {
@@ -75,6 +76,7 @@ class ConfigurePageComponent extends AuthComponent {
       .then(data => {
         let sections = [];
         let monkeyConfig = data[0];
+        monkeyConfig = changeToUI(monkeyConfig);
         this.setInitialConfig(monkeyConfig.configuration);
         for (let sectionKey of this.getSectionsOrder()) {
           sections.push({
@@ -317,6 +319,7 @@ class ConfigurePageComponent extends AuthComponent {
   };
 
   sendConfig() {
+
     return (
       this.authFetch('/api/configuration/island',
         {

@@ -31,6 +31,7 @@ function AdvancedMultiSelectHeader(props) {
 class AdvancedMultiSelect extends React.Component {
   constructor(props) {
     super(props);
+    console.log("IFNALLY!");
 
     this.defaultValues = props.schema.default;
     this.infoPaneRefString = props.schema.items.$ref;

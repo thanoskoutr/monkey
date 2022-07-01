@@ -7,6 +7,7 @@ import {tcpScanConfigurationSchema} from './definitions/tcp_scan.js';
 import {scanTargetConfigurationSchema} from './definitions/scan_target.js';
 import {propagationConfigurationSchema} from './definitions/propagation.js';
 import {networkScanConfigurationSchema} from './definitions/network_scan.js';
+import {bruteForceExploiters} from './definitions/brute_force_exploiters';
 
 export const SCHEMA = {
   'title': 'Monkey',
@@ -20,7 +21,8 @@ export const SCHEMA = {
     'tcp_scan': tcpScanConfigurationSchema,
     'scan_target': scanTargetConfigurationSchema,
     'propagation': propagationConfigurationSchema,
-    'network_scan': networkScanConfigurationSchema
+    'network_scan': networkScanConfigurationSchema,
+    'brute_force_exploiters': bruteForceExploiters
   },
   'properties': {
     'general': {

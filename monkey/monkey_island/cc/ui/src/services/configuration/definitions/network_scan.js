@@ -1,3 +1,5 @@
+import {pluginConfigurationSchema} from './plugins';
+
 export const networkScanConfigurationSchema  = {
   'type': 'object',
   'additionalProperties': false,
@@ -5,9 +7,7 @@ export const networkScanConfigurationSchema  = {
     'fingerprinters': {
       'title': 'Fingerprinters',
       'type': 'array',
-      'items': {
-      '$ref': '#/definitions/plugins'
-      },
+      'items': pluginConfigurationSchema,
       'default': [
         {'name': 'SMBFinger', 'safe': true, 'options': {}},
         {'name': 'SSHFinger', 'safe': true, 'options': {}},
