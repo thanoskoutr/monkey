@@ -14,7 +14,8 @@ const POST_BREACH_ACTIONS = {
     'SignedScriptProxyExecution':{'name': 'SignedScriptProxyExecution', 'options':{}},
     'AccountDiscovery':{'name': 'AccountDiscovery', 'options':{}},
     'ClearCommandHistory':{'name': 'ClearCommandHistory', 'options':{}},
-    'ProcessListCollection':{'name': 'ProcessListCollection', 'options':{}}
+    'ProcessListCollection':{'name': 'ProcessListCollection', 'options':{}},
+    'SystemServicesCollection':{'name': 'SystemServicesCollection', 'options':{}}
   },
   'anyOf': [
     {
@@ -104,6 +105,13 @@ const POST_BREACH_ACTIONS = {
       'title': 'Process List Collector',
       'safe': true,
       'info': 'Collects a list of running processes on the machine.'
+    },
+    {
+      'type': 'string',
+      'enum': ['SystemServicesCollection'],
+      'title': 'System Services Collector',
+      'safe': true,
+      'info': 'Collects a list of system services on the machine.'
     }
   ]
 

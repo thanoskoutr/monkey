@@ -51,6 +51,7 @@ from infection_monkey.payload.ransomware.ransomware_payload import RansomwarePay
 from infection_monkey.post_breach.actions.change_file_privileges import ChangeSetuidSetgid
 from infection_monkey.post_breach.actions.clear_command_history import ClearCommandHistory
 from infection_monkey.post_breach.actions.collect_processes_list import ProcessListCollection
+from infection_monkey.post_breach.actions.collect_system_services import SystemServicesCollection
 from infection_monkey.post_breach.actions.communicate_as_backdoor_user import (
     CommunicateAsBackdoorUser,
 )
@@ -336,6 +337,11 @@ class InfectionMonkey:
         puppet.load_plugin(
             "ProcessListCollection",
             ProcessListCollection(self._telemetry_messenger),
+            PluginType.POST_BREACH_ACTION,
+        )
+        puppet.load_plugin(
+            "SystemServicesCollection",
+            SystemServicesCollection(self._telemetry_messenger),
             PluginType.POST_BREACH_ACTION,
         )
         puppet.load_plugin(

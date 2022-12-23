@@ -21,6 +21,7 @@ PBAS = (
     "Timestomping",
     "AccountDiscovery",
     "ProcessListCollection",
+    "SystemServicesCollection",
 )
 
 CREDENTIAL_COLLECTORS = ("MimikatzCollector", "SSHCollector")

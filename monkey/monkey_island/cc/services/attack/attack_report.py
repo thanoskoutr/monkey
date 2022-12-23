@@ -6,6 +6,7 @@ from monkey_island.cc.services.attack.attack_schema import SCHEMA
 from monkey_island.cc.services.attack.technique_reports import (
     T1003,
     T1005,
+    T1007,
     T1016,
     T1018,
     T1021,
@@ -80,6 +81,7 @@ TECHNIQUES = {
     "T1216": T1216.T1216,
     "T1087": T1087.T1087,
     "T1146": T1146.T1146,
+    "T1007": T1007.T1007,
 }
 
 REPORT_NAME = "new_report"

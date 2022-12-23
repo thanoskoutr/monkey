@@ -43,6 +43,7 @@ In the following table, we list all the MITRE ATT&CK techniques the Infection Mo
 |                                                                   | [Remote System Discovery](https://attack.mitre.org/techniques/T1018/)                      |
 |                                                                   | [System Information Discovery](https://attack.mitre.org/techniques/T1082/)                 |
 |                                                                   | [System Network Configuration Discovery](https://attack.mitre.org/techniques/T1016/)       |
+|                                                                   | [ System Service Discovery ](https://attack.mitre.org/techniques/T1007/)       |
 | [Lateral Movement](https://attack.mitre.org/tactics/TA0008/)      | [Exploitation Of Remote Services](https://attack.mitre.org/techniques/T1210/)              |
 |                                                                   | [Pass The Hash](https://attack.mitre.org/techniques/T1075/)                                |
 |                                                                   | [Remote File Copy](https://attack.mitre.org/techniques/T1105/)                             |

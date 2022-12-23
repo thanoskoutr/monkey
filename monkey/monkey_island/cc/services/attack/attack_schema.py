@@ -260,6 +260,16 @@ SCHEMA = {
                     "discovery"
                     " of remote systems.",
                 },
+                "T1007": {
+                    "title": "System Service Discovery",
+                    "type": "bool",
+                    "link": "https://attack.mitre.org/techniques/T1007",
+                    "description": "Adversaries may attempt to get a listing of registered "
+                    "local system services."
+                    "Adversaries may use the information to shape follow-on behaviors "
+                    "including whether or not the adversary fully infects the target "
+                    "and/or attempts specific actions.",
+                },
             },
         },
         "lateral_movement": {
